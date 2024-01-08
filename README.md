@@ -18,6 +18,7 @@ USAGE:
 GLOBAL OPTIONS:
    --listen value, -l value   address to listen on (0.0.0.0 means all interfaces) (default: "0.0.0.0")
    --port value, -p value     port to listen on (default: 514)
+   --sample value, -m value   sample up to <value> log entries, then exit (default: 1000)
    --tcp, -t                  use TCP instead of UDP (default: false)
    --tls, -s                  use TLS for TCP server (default: false)
    --tls-key value            TLS key file to use for TCP/TLS server
