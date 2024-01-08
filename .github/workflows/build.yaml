@@ -19,6 +19,11 @@ jobs:
           - darwin
           - windows
           - linux
+        exclude:
+          - os: windows
+            arch: i386
+          - os: darwin
+            arch: i386
     runs-on: ubuntu-latest
     container:
       image: golang:1.21
