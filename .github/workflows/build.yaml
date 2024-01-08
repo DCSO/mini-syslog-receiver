@@ -6,7 +6,7 @@ on:
 
 jobs:
   linux:
-    name: Build ${{ matrix.os }} (${{ matrix.arch}}
+    name: Build ${{ matrix.os }} ${{ matrix.arch}}
     env:
       DEBIAN_FRONTEND: noninteractive
     strategy:
@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Set up user
+        run: |
+             useradd -m -g users testuser
+             chown -R testuser:users .
       - name: Build for ${{ matrix.arch }} ${{ matrix.os }}
         run: |
-             GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -v -o binary-${{ matrix.os }}-${{ matrix.arch }}
+             su -c "GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -v -o binary-${{ matrix.os }}-${{ matrix.arch }}" testuser
