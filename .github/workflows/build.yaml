@@ -1,0 +1,30 @@
+name: Build and test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  linux:
+    name: Build ${{ matrix.os }} (${{ matrix.arch}}
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    strategy:
+      matrix:
+        arch:
+          - i386
+          - amd64
+          - arm64
+        os:
+          - darwin
+          - windows
+          - linux
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.21
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Build for ${{ matrix.arch }} ${{ matrix.os }}
+        run: |
+             GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -v -o binary-${{ matrix.os }}-${{ matrix.arch }}
