@@ -85,7 +85,7 @@ func main() {
 
 			var err error
 			server := syslog.NewServer()
-			server.SetFormat(syslog.RFC5424)
+			server.SetFormat(syslog.Automatic)
 			server.SetHandler(handler)
 
 			addr := fmt.Sprintf("%s:%d", ctx.String("listen"), ctx.Uint64("port"))
